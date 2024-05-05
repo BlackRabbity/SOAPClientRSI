@@ -16,15 +16,13 @@ using System.Windows.Shapes;
 namespace SOAPClientRSI
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ReservationPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ReservationPage : Page
     {
-        public MainWindow()
+        public ReservationPage()
         {
             InitializeComponent();
-            MainFrame.Content = new ButtonPanelPage();
         }
-
     }
 }

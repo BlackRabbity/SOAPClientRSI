@@ -16,15 +16,21 @@ using System.Windows.Shapes;
 namespace SOAPClientRSI
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for PriceListPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class PriceListPage : Page
     {
-        public MainWindow()
+        public PriceListPage()
         {
             InitializeComponent();
-            MainFrame.Content = new ButtonPanelPage();
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
+        }
     }
 }
