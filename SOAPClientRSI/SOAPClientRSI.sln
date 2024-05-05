@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34221.43
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SOAPClientRSI", "SOAPClientRSI\SOAPClientRSI.csproj", "{EA1C812B-FA68-4372-AB9C-C2E931C3B802}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EA1C812B-FA68-4372-AB9C-C2E931C3B802}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA1C812B-FA68-4372-AB9C-C2E931C3B802}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA1C812B-FA68-4372-AB9C-C2E931C3B802}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA1C812B-FA68-4372-AB9C-C2E931C3B802}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7D6D723E-EC7A-41CF-AB79-8F2B69D64C0A}
+	EndGlobalSection
+EndGlobal

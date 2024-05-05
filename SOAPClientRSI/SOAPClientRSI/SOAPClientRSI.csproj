@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="UI\logo_klient.png" />
+    <None Remove="UI\Smiles.otf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="UI\logo_klient.png" />
+    <Resource Include="UI\Smiles.otf" />
+  </ItemGroup>
+
+</Project>
