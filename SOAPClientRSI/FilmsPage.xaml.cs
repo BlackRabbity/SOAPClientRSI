@@ -12,36 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ServiceReference;
 
 namespace SOAPClientRSI
 {
-    public class Film
-    {
-        public string Title { get; set; }
-        public DateTime DayOfPlay { get; set; }
-        public string Hour { get; set; }
-        public Film(string title, DateTime dayOfPlay, string hour)
-        {
-            this.Title = title;
-            this.DayOfPlay = dayOfPlay;
-            this.Hour = hour;
-        }
-    }
-
     public partial class FilmsPage : Page
     {
-        public List<Film> Films { get; set; }
+        private CinemaImplClient client;
+
         public FilmsPage()
         {
             InitializeComponent();
-
-            Films = new List<Film>()
-            {
-                new Film("Film 1", new DateTime(2020, 8, 9), "10:00"),
-                new Film("Film 2", new DateTime(2020, 8, 9), "12:00"),
-                new Film("Film 3", new DateTime(2020, 8, 9), "14:00"),
-            };
-            Films_ListBox.DataContext = Films;
+            client = new CinemaImplClient();
+            InitializeAsync();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -49,6 +32,19 @@ namespace SOAPClientRSI
             if (NavigationService.CanGoBack)
             {
                 NavigationService.GoBack();
+            }
+        }
+        private async void InitializeAsync()
+        {
+            try
+            {
+                var result = await client.getShowingsAsync();
+                List<showing> showings = result.@return.ToList();
+                Films_ListBox.DataContext = showings;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

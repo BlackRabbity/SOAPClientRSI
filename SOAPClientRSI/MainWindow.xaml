@@ -19,8 +19,9 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Image HorizontalAlignment="Left" VerticalAlignment="Center" Source="UI/logo_klient.png" Width="300" Margin="10"/>
-        <Frame x:Name="MainFrame" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" NavigationUIVisibility="Hidden"/>
+        <Image HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="LogoImage" Width="300" Margin="10"/>
+        <Frame x:Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+         VerticalContentAlignment="Stretch"/>
     </Grid>
 </Window>
     

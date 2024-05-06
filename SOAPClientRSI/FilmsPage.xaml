@@ -16,22 +16,29 @@
             <!-- 1/4 of the page -->
         </Grid.RowDefinitions>
         <ListBox Grid.Row="0" x:Name="Films_ListBox" ItemsSource="{Binding}" Margin="20">
+            <ListBox.Background>
+                <SolidColorBrush Color="#33FFFFFF"/>
+            </ListBox.Background>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Text="{Binding Title}" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding film.title}" FontWeight="Bold"/>
                         <TextBlock>
-                            <Run Text="Day of Play: "/>
-                            <Run Text="{Binding DayOfPlay, StringFormat={}{0:yyyy-MM-dd}}"/>
+                    <Run Text="Day of Play: "/>
+                    <Run Text="{Binding date, StringFormat={}{0:yyyy-MM-dd}}"/>
                         </TextBlock>
                         <TextBlock>
-                            <Run Text="Hour: "/>
-                            <Run Text="{Binding Hour}"/>
+                    <Run Text="Hour: "/>
+                    <Run Text="{Binding date, StringFormat={}{0:HH:mm}}"/>
+                        </TextBlock>
+                        <TextBlock>
+                    <Run Text="All seats: "/>
+                    <Run Text="{Binding room.maxSeats}"/>
                         </TextBlock>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-          </ListBox>
+        </ListBox>
         <Button Template="{StaticResource TransparentButtonTemplate}" Grid.Row="1" FontFamily="UI/Smiles.otf#Smiles" FontSize="60" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Back" Background="Transparent" Click="Button_Click"/>
     </Grid>
 </Page>
