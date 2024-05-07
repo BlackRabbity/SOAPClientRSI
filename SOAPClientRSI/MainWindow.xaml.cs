@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ServiceReference;
+using SOAPClientRSI.Utilities;
 
 namespace SOAPClientRSI
 {
@@ -23,25 +24,16 @@ namespace SOAPClientRSI
     /// </summary>
     public partial class MainWindow : Window
     {
-        private CinemaImplClient client;
         public MainWindow()
         {
             InitializeComponent();
             MainFrame.Content = new ButtonPanelPage();
-
-            // MTOM
-            BasicHttpBinding binding = new BasicHttpBinding();
-            binding.MessageEncoding = WSMessageEncoding.Mtom;
-            EndpointAddress endpointAddress = new EndpointAddress("http://localhost:9999/ws/CinemaImpl");
-            client = new CinemaImplClient(binding, endpointAddress);
-
-            //Load image with MTOM
             LoadLogoAsync();
         }
 
         private async void LoadLogoAsync()
         {
-
+            CinemaImplClient client = ClientProvider.Client;
             try
             {
                 var result = await client.getLogoAsync();

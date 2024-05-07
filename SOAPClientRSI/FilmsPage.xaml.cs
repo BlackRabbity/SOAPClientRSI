@@ -13,17 +13,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ServiceReference;
+using SOAPClientRSI.Utilities;
 
 namespace SOAPClientRSI
 {
     public partial class FilmsPage : Page
     {
-        private CinemaImplClient client;
-
         public FilmsPage()
         {
             InitializeComponent();
-            client = new CinemaImplClient();
             InitializeAsync();
         }
 
@@ -36,6 +34,7 @@ namespace SOAPClientRSI
         }
         private async void InitializeAsync()
         {
+            CinemaImplClient client = ClientProvider.Client;
             try
             {
                 var result = await client.getShowingsAsync();
