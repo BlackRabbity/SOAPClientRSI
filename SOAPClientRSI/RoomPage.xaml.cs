@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ServiceReference;
+using SOAPClientRSI.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,17 +14,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ServiceReference;
-using SOAPClientRSI.Utilities;
 
 namespace SOAPClientRSI
 {
-    public partial class FilmsPage : Page
+    /// <summary>
+    /// Interaction logic for RoomPage.xaml
+    /// </summary>
+    public partial class RoomPage : Page
     {
-        public FilmsPage()
+        public RoomPage(showing showing)
         {
             InitializeComponent();
-            InitializeAsync();
+            Seats_ListBox.DataContext = showing.room.seats;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -32,27 +35,21 @@ namespace SOAPClientRSI
                 NavigationService.GoBack();
             }
         }
-        private async void InitializeAsync()
+
+        private async void Reserve_Seat(object sender, MouseButtonEventArgs e)
         {
             CinemaImplClient client = ClientProvider.Client;
             try
             {
-                var result = await client.getShowingsAsync();
-                List<showing> showings = result.@return.ToList();
-                Films_ListBox.DataContext = showings;
+                seat selectedSeat = (seat)Seats_ListBox.SelectedItem;
+                if (selectedSeat != null)
+                {
+                    await client.reserveSeatAsync(selectedSeat);
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-        private void Select_Seats(object sender, MouseButtonEventArgs e)
-        {
-            if (Films_ListBox.SelectedItem != null)
-            {
-                var selectedShowing = (showing)Films_ListBox.SelectedItem;
-                RoomPage roomPage = new RoomPage(selectedShowing);
-                NavigationService.Navigate(roomPage);
             }
         }
     }

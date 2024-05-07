@@ -16,10 +16,6 @@ namespace ServiceReference
     public interface CinemaImpl
     {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://WS/CinemaImpl/getLogoRequest", ReplyAction="http://WS/CinemaImpl/getLogoResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference.getLogoResponse> getLogoAsync(ServiceReference.getLogoRequest request);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://WS/CinemaImpl/echoRequest", ReplyAction="http://WS/CinemaImpl/echoResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<ServiceReference.echoResponse> echoAsync(ServiceReference.echoRequest request);
@@ -27,39 +23,18 @@ namespace ServiceReference
         [System.ServiceModel.OperationContractAttribute(Action="http://WS/CinemaImpl/getShowingsRequest", ReplyAction="http://WS/CinemaImpl/getShowingsResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<ServiceReference.getShowingsResponse> getShowingsAsync(ServiceReference.getShowingsRequest request);
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getLogo", WrapperNamespace="http://WS/", IsWrapped=true)]
-    public partial class getLogoRequest
-    {
         
-        public getLogoRequest()
-        {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getLogoResponse", WrapperNamespace="http://WS/", IsWrapped=true)]
-    public partial class getLogoResponse
-    {
+        [System.ServiceModel.OperationContractAttribute(Action="http://WS/CinemaImpl/getLogoRequest", ReplyAction="http://WS/CinemaImpl/getLogoResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<ServiceReference.getLogoResponse> getLogoAsync(ServiceReference.getLogoRequest request);
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://WS/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="base64Binary")]
-        public byte[] @return;
+        [System.ServiceModel.OperationContractAttribute(Action="http://WS/CinemaImpl/reserveSeatRequest", ReplyAction="http://WS/CinemaImpl/reserveSeatResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<ServiceReference.reserveSeatResponse> reserveSeatAsync(ServiceReference.reserveSeatRequest request);
         
-        public getLogoResponse()
-        {
-        }
-        
-        public getLogoResponse(byte[] @return)
-        {
-            this.@return = @return;
-        }
+        [System.ServiceModel.OperationContractAttribute(Action="http://WS/CinemaImpl/getClientIPRequest", ReplyAction="http://WS/CinemaImpl/getClientIPResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<ServiceReference.getClientIPResponse> getClientIPAsync(ServiceReference.getClientIPRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -113,9 +88,7 @@ namespace ServiceReference
         
         private film filmField;
         
-        private System.DateTime dateField;
-        
-        private bool dateFieldSpecified;
+        private string dateField;
         
         private room roomField;
         
@@ -135,7 +108,7 @@ namespace ServiceReference
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public System.DateTime date
+        public string date
         {
             get
             {
@@ -144,20 +117,6 @@ namespace ServiceReference
             set
             {
                 this.dateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool dateSpecified
-        {
-            get
-            {
-                return this.dateFieldSpecified;
-            }
-            set
-            {
-                this.dateFieldSpecified = value;
             }
         }
         
@@ -255,6 +214,8 @@ namespace ServiceReference
     public partial class seat
     {
         
+        private int seatNumberField;
+        
         private int rowField;
         
         private int columnField;
@@ -263,6 +224,20 @@ namespace ServiceReference
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public int seatNumber
+        {
+            get
+            {
+                return this.seatNumberField;
+            }
+            set
+            {
+                this.seatNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
         public int row
         {
             get
@@ -276,7 +251,7 @@ namespace ServiceReference
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
         public int column
         {
             get
@@ -290,7 +265,7 @@ namespace ServiceReference
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
         public string reservation
         {
             get
@@ -311,6 +286,8 @@ namespace ServiceReference
     public partial class room
     {
         
+        private int roomNumberField;
+        
         private seat[] seatsField;
         
         private int maxSeatsField;
@@ -318,7 +295,21 @@ namespace ServiceReference
         private int freeSeatsField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("seats", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=true, Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public int roomNumber
+        {
+            get
+            {
+                return this.roomNumberField;
+            }
+            set
+            {
+                this.roomNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("seats", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=true, Order=1)]
         public seat[] seats
         {
             get
@@ -332,7 +323,7 @@ namespace ServiceReference
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
         public int maxSeats
         {
             get
@@ -346,7 +337,7 @@ namespace ServiceReference
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
         public int freeSeats
         {
             get
@@ -388,6 +379,114 @@ namespace ServiceReference
         }
         
         public getShowingsResponse(ServiceReference.showing[] @return)
+        {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getLogo", WrapperNamespace="http://WS/", IsWrapped=true)]
+    public partial class getLogoRequest
+    {
+        
+        public getLogoRequest()
+        {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getLogoResponse", WrapperNamespace="http://WS/", IsWrapped=true)]
+    public partial class getLogoResponse
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://WS/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="base64Binary")]
+        public byte[] @return;
+        
+        public getLogoResponse()
+        {
+        }
+        
+        public getLogoResponse(byte[] @return)
+        {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="reserveSeat", WrapperNamespace="http://WS/", IsWrapped=true)]
+    public partial class reserveSeatRequest
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://WS/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public ServiceReference.seat arg0;
+        
+        public reserveSeatRequest()
+        {
+        }
+        
+        public reserveSeatRequest(ServiceReference.seat arg0)
+        {
+            this.arg0 = arg0;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="reserveSeatResponse", WrapperNamespace="http://WS/", IsWrapped=true)]
+    public partial class reserveSeatResponse
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://WS/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int @return;
+        
+        public reserveSeatResponse()
+        {
+        }
+        
+        public reserveSeatResponse(int @return)
+        {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getClientIP", WrapperNamespace="http://WS/", IsWrapped=true)]
+    public partial class getClientIPRequest
+    {
+        
+        public getClientIPRequest()
+        {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getClientIPResponse", WrapperNamespace="http://WS/", IsWrapped=true)]
+    public partial class getClientIPResponse
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://WS/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string @return;
+        
+        public getClientIPResponse()
+        {
+        }
+        
+        public getClientIPResponse(string @return)
         {
             this.@return = @return;
         }
@@ -444,18 +543,6 @@ namespace ServiceReference
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<ServiceReference.getLogoResponse> ServiceReference.CinemaImpl.getLogoAsync(ServiceReference.getLogoRequest request)
-        {
-            return base.Channel.getLogoAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<ServiceReference.getLogoResponse> getLogoAsync()
-        {
-            ServiceReference.getLogoRequest inValue = new ServiceReference.getLogoRequest();
-            return ((ServiceReference.CinemaImpl)(this)).getLogoAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.Threading.Tasks.Task<ServiceReference.echoResponse> ServiceReference.CinemaImpl.echoAsync(ServiceReference.echoRequest request)
         {
             return base.Channel.echoAsync(request);
@@ -478,6 +565,43 @@ namespace ServiceReference
         {
             ServiceReference.getShowingsRequest inValue = new ServiceReference.getShowingsRequest();
             return ((ServiceReference.CinemaImpl)(this)).getShowingsAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<ServiceReference.getLogoResponse> ServiceReference.CinemaImpl.getLogoAsync(ServiceReference.getLogoRequest request)
+        {
+            return base.Channel.getLogoAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference.getLogoResponse> getLogoAsync()
+        {
+            ServiceReference.getLogoRequest inValue = new ServiceReference.getLogoRequest();
+            return ((ServiceReference.CinemaImpl)(this)).getLogoAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<ServiceReference.reserveSeatResponse> ServiceReference.CinemaImpl.reserveSeatAsync(ServiceReference.reserveSeatRequest request)
+        {
+            return base.Channel.reserveSeatAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference.reserveSeatResponse> reserveSeatAsync(ServiceReference.seat arg0)
+        {
+            ServiceReference.reserveSeatRequest inValue = new ServiceReference.reserveSeatRequest();
+            inValue.arg0 = arg0;
+            return ((ServiceReference.CinemaImpl)(this)).reserveSeatAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<ServiceReference.getClientIPResponse> ServiceReference.CinemaImpl.getClientIPAsync(ServiceReference.getClientIPRequest request)
+        {
+            return base.Channel.getClientIPAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference.getClientIPResponse> getClientIPAsync()
+        {
+            ServiceReference.getClientIPRequest inValue = new ServiceReference.getClientIPRequest();
+            return ((ServiceReference.CinemaImpl)(this)).getClientIPAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
@@ -503,7 +627,7 @@ namespace ServiceReference
         {
             if ((endpointConfiguration == EndpointConfiguration.CinemaImplPort))
             {
-                return new System.ServiceModel.EndpointAddress("http://localhost:9999/ws/CinemaImpl");
+                return new System.ServiceModel.EndpointAddress("http://192.168.1.5:9999/ws/CinemaImpl");
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }

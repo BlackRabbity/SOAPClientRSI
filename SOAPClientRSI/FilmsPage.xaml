@@ -4,10 +4,13 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SOAPClientRSI"
+      xmlns:other="clr-namespace:SOAPClientRSI.Utilities"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="FilmsPage">
-
+    <Page.Resources>
+        <other:DateTimeConverter x:Key="DateTimeConverter"/>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
@@ -15,7 +18,8 @@
             <RowDefinition Height="1*"/>
             <!-- 1/4 of the page -->
         </Grid.RowDefinitions>
-        <ListBox Grid.Row="0" x:Name="Films_ListBox" ItemsSource="{Binding}" Margin="20">
+        <ListBox Grid.Row="0" x:Name="Films_ListBox" ItemsSource="{Binding}" Margin="20"
+                 MouseDoubleClick="Select_Seats">
             <ListBox.Background>
                 <SolidColorBrush Color="#33FFFFFF"/>
             </ListBox.Background>
@@ -25,15 +29,15 @@
                         <TextBlock Text="{Binding film.title}" FontWeight="Bold"/>
                         <TextBlock>
                     <Run Text="Day of Play: "/>
-                    <Run Text="{Binding date, StringFormat={}{0:yyyy-MM-dd}}"/>
+                    <Run Text="{Binding date, Converter={StaticResource DateTimeConverter}, ConverterParameter=Date}"/>
                         </TextBlock>
                         <TextBlock>
                     <Run Text="Hour: "/>
-                    <Run Text="{Binding date, StringFormat={}{0:HH:mm}}"/>
+                    <Run Text="{Binding date, Converter={StaticResource DateTimeConverter}, ConverterParameter=Time}"/>
                         </TextBlock>
                         <TextBlock>
-                    <Run Text="All seats: "/>
-                    <Run Text="{Binding room.maxSeats}"/>
+                    <Run Text="Room: "/>
+                    <Run Text="{Binding room.roomNumber}"/>
                         </TextBlock>
                     </StackPanel>
                 </DataTemplate>
