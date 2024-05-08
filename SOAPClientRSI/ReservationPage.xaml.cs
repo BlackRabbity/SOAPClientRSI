@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ServiceReference;
+using SOAPClientRSI.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,30 @@ namespace SOAPClientRSI
         public ReservationPage()
         {
             InitializeComponent();
+            LoadReservationAsync();
+        }
+
+        private async void LoadReservationAsync()
+        {
+            CinemaImplClient client = ClientProvider.Client;
+            string macAddress = MACAddressProvider.GetMACAddress();
+            try
+            {
+                var result = await client.GetReservedSeatsAsync(macAddress);
+                ReservedSeats_ListBox.DataContext = result.@return;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
         }
     }
 }

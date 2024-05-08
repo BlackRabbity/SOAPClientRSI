@@ -29,7 +29,9 @@ namespace SOAPClientRSI
         {
             if (NavigationService.CanGoBack)
             {
-                NavigationService.GoBack();
+                var mainWindow = (MainWindow)Application.Current.MainWindow;
+                ButtonPanelPage buttonPanelPage = new ButtonPanelPage();
+                mainWindow.MainFrame.NavigationService.Navigate(buttonPanelPage);
             }
         }
         private async void InitializeAsync()
@@ -51,7 +53,8 @@ namespace SOAPClientRSI
             if (Films_ListBox.SelectedItem != null)
             {
                 var selectedShowing = (showing)Films_ListBox.SelectedItem;
-                RoomPage roomPage = new RoomPage(selectedShowing);
+                int selectedShowingId = Films_ListBox.SelectedIndex;
+                RoomPage roomPage = new RoomPage(selectedShowing, selectedShowingId);
                 NavigationService.Navigate(roomPage);
             }
         }

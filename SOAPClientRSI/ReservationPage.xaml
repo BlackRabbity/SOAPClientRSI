@@ -9,6 +9,36 @@
       Title="ReservationPage">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <!-- 3/4 of the page -->
+            <RowDefinition Height="1*"/>
+            <!-- 1/4 of the page -->
+        </Grid.RowDefinitions>
+        <ListBox Grid.Row="0" x:Name="ReservedSeats_ListBox" ItemsSource="{Binding}" Margin="20">
+            <ListBox.Background>
+                <SolidColorBrush Color="#33FFFFFF"/>
+            </ListBox.Background>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="5" Padding="5" BorderThickness="1" CornerRadius="5">
+                        <StackPanel>
+                            <TextBlock Text="Seat: " FontWeight="Bold">
+                        <TextBlock Text="{Binding seatNumber}" FontWeight="Bold"/>
+                        </TextBlock>
+                            <TextBlock>
+                    <Run Text="Row: "/>
+                    <Run Text="{Binding row}"/>
+                    <Run Text=" / "/>
+                    <Run Text="Column: "/>
+                    <Run Text="{Binding column}"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Button Template="{StaticResource TransparentButtonTemplate}" Grid.Row="1" FontFamily="UI/Smiles.otf#Smiles" FontSize="60" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Back" Background="Transparent" Click="Button_Click"/>
     </Grid>
 </Page>
