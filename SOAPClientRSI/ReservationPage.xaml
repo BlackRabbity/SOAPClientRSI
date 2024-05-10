@@ -4,10 +4,13 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SOAPClientRSI"
+      xmlns:other="clr-namespace:SOAPClientRSI.Utilities"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ReservationPage">
-
+    <Page.Resources>
+        <other:DateTimeConverter x:Key="DateTimeConverter"/>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
@@ -15,7 +18,11 @@
             <RowDefinition Height="1*"/>
             <!-- 1/4 of the page -->
         </Grid.RowDefinitions>
-        <ListBox Grid.Row="0" x:Name="ReservedSeats_ListBox" ItemsSource="{Binding}" Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ListBox Grid.Row="0" x:Name="ReservedSeats_ListBox" Grid.ColumnSpan="2" ItemsSource="{Binding}" Margin="20">
             <ListBox.Background>
                 <SolidColorBrush Color="#33FFFFFF"/>
             </ListBox.Background>
@@ -23,16 +30,33 @@
                 <DataTemplate>
                     <Border Margin="5" Padding="5" BorderThickness="1" CornerRadius="5">
                         <StackPanel>
-                            <TextBlock Text="Seat: " FontWeight="Bold">
-                        <TextBlock Text="{Binding seatNumber}" FontWeight="Bold"/>
+                        <TextBlock Text="Title: " FontWeight="Bold">
+                        <TextBlock Text="{Binding film.title}" FontWeight="Bold"/>
                         </TextBlock>
-                            <TextBlock>
-                    <Run Text="Row: "/>
-                    <Run Text="{Binding row}"/>
-                    <Run Text=" / "/>
-                    <Run Text="Column: "/>
-                    <Run Text="{Binding column}"/>
-                            </TextBlock>
+                        <TextBlock Text="Day of play: ">
+                        <TextBlock Text="{Binding date, Converter={StaticResource DateTimeConverter}, ConverterParameter=Date}"/>
+                        </TextBlock>
+                        <TextBlock Text="Starting time: ">
+                        <TextBlock Text="{Binding date, Converter={StaticResource DateTimeConverter}, ConverterParameter=Time}"/>
+                        </TextBlock>
+                            <ListBox ItemsSource="{Binding room.seats}" Margin="5">
+                                <ListBox.Background>
+                                    <SolidColorBrush Color="#33FFFFFF"/>
+                                </ListBox.Background>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Seat Number: "/>
+                                            <TextBlock Text="{Binding seatNumber}" />
+                                            <TextBlock Text=" (row: "/>
+                                            <TextBlock Text="{Binding row}" />
+                                            <TextBlock Text=" column: "/>
+                                            <TextBlock Text="{Binding column}" />
+                                            <TextBlock Text=")"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
                         </StackPanel>
                     </Border>
                 </DataTemplate>
@@ -40,5 +64,6 @@
         </ListBox>
 
         <Button Template="{StaticResource TransparentButtonTemplate}" Grid.Row="1" FontFamily="UI/Smiles.otf#Smiles" FontSize="60" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Back" Background="Transparent" Click="Button_Click"/>
+        <Button Template="{StaticResource TransparentButtonTemplate}" Grid.Row="1" Grid.Column="2" FontFamily="UI/Smiles.otf#Smiles" FontSize="60" VerticalAlignment="Center" HorizontalAlignment="Center" Content="PDF" Background="Transparent" Click="ReservationToPDF"/>
     </Grid>
 </Page>

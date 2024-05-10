@@ -63,5 +63,26 @@ namespace SOAPClientRSI
                 MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        private void MultiReservation(object sender, RoutedEventArgs e)
+        {
+            MultiSeatsReservationPopupWindow popup = new MultiSeatsReservationPopupWindow(showingId);
+            popup.Closed += Popup_Closed;
+            popup.ShowDialog();
+        }
+        private async void Popup_Closed(object? sender, EventArgs e)
+        {
+            CinemaImplClient client = ClientProvider.Client;
+            try
+            {
+                var result = await client.getShowingsAsync();
+                List<showing> showings = result.@return.ToList();
+                Seats_ListBox.DataContext = showings[showingId].room.seats.OrderBy(s => s.row).ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }

@@ -50,5 +50,10 @@ namespace SOAPClientRSI
                 NavigationService.GoBack();
             }
         }
+
+        private void ReservationToPDF(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

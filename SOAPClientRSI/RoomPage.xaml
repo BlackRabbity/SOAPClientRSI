@@ -15,7 +15,11 @@
             <RowDefinition Height="1*"/>
             <!-- 1/4 of the page -->
         </Grid.RowDefinitions>
-        <ListBox Grid.Row="0" x:Name="Seats_ListBox" ItemsSource="{Binding}" Margin="20" MouseDoubleClick="Reserve_Seat">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ListBox Grid.Row="0" Grid.ColumnSpan="2" x:Name="Seats_ListBox" ItemsSource="{Binding}" Margin="20" MouseDoubleClick="Reserve_Seat">
             <ListBox.Background>
                 <SolidColorBrush Color="#33FFFFFF"/>
             </ListBox.Background>
@@ -53,5 +57,6 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <Button Template="{StaticResource TransparentButtonTemplate}" Grid.Row="1" FontFamily="UI/Smiles.otf#Smiles" FontSize="60" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Back" Background="Transparent" Click="Button_Click"/>
+        <Button Template="{StaticResource TransparentButtonTemplate}" Grid.Row="1" Grid.Column="1" FontFamily="UI/Smiles.otf#Smiles" FontSize="60" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Custom" Background="Transparent" Click="MultiReservation"/>
     </Grid>
 </Page>
