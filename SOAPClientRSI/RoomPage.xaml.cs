@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -26,13 +27,13 @@ namespace SOAPClientRSI
     public partial class RoomPage : Page
     {
         public int showingId;
-        public int Columns;
+        public int Columns { get; set; }
         public RoomPage(showing showing, int showingId)
         {
             InitializeComponent();
             this.showingId = showingId;
-            Seats_ListBox.DataContext = showing.room.seats.OrderBy(s => s.row).ToList();
             Columns = showing.room.seats.Count() / 2;
+            Seats_ListBox.DataContext = showing.room.seats.OrderBy(s => s.row).ToList();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -49,10 +50,12 @@ namespace SOAPClientRSI
             try
             {
                 int seatId = Seats_ListBox.SelectedIndex;
+                var reservationMessage = await client.checkReservationAsync(seatId, showingId, macAddress);
+                MessageBoxResult messageBox = MessageBox.Show(reservationMessage.@return, "Confirmation", MessageBoxButton.OK);
                 await client.reserveSeatAsync(seatId, ",", showingId, ",", macAddress);
                 var result = await client.getShowingsAsync();
                 List<showing> showings = result.@return.ToList();
-                Seats_ListBox.DataContext = showings[showingId].room.seats.OrderBy(s => s.row).ToList(); ;
+                Seats_ListBox.DataContext = showings[showingId].room.seats.OrderBy(s => s.row).ToList();
 
             }
             catch (Exception ex)

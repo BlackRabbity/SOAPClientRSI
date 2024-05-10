@@ -20,10 +20,6 @@ namespace ServiceReference
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<ServiceReference.handleReservationValueReturnResponse> handleReservationValueReturnAsync(ServiceReference.handleReservationValueReturnRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://WS/CinemaImpl/echoRequest", ReplyAction="http://WS/CinemaImpl/echoResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<ServiceReference.echoResponse> echoAsync(ServiceReference.echoRequest request);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://WS/CinemaImpl/getShowingsRequest", ReplyAction="http://WS/CinemaImpl/getShowingsResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<ServiceReference.getShowingsResponse> getShowingsAsync(ServiceReference.getShowingsRequest request);
@@ -39,6 +35,14 @@ namespace ServiceReference
         [System.ServiceModel.OperationContractAttribute(Action="http://WS/CinemaImpl/reserveSeatRequest", ReplyAction="http://WS/CinemaImpl/reserveSeatResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<ServiceReference.reserveSeatResponse> reserveSeatAsync(ServiceReference.reserveSeatRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://WS/CinemaImpl/checkReservationRequest", ReplyAction="http://WS/CinemaImpl/checkReservationResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<ServiceReference.checkReservationResponse> checkReservationAsync(ServiceReference.checkReservationRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://WS/CinemaImpl/echoRequest", ReplyAction="http://WS/CinemaImpl/echoResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<ServiceReference.echoResponse> echoAsync(ServiceReference.echoRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -81,48 +85,6 @@ namespace ServiceReference
         
         public handleReservationValueReturnResponse()
         {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="echo", WrapperNamespace="http://WS/", IsWrapped=true)]
-    public partial class echoRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://WS/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string arg0;
-        
-        public echoRequest()
-        {
-        }
-        
-        public echoRequest(string arg0)
-        {
-            this.arg0 = arg0;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="echoResponse", WrapperNamespace="http://WS/", IsWrapped=true)]
-    public partial class echoResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://WS/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string @return;
-        
-        public echoResponse()
-        {
-        }
-        
-        public echoResponse(string @return)
-        {
-            this.@return = @return;
         }
     }
     
@@ -568,6 +530,100 @@ namespace ServiceReference
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="checkReservation", WrapperNamespace="http://WS/", IsWrapped=true)]
+    public partial class checkReservationRequest
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://WS/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int arg0;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://WS/", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public int arg1;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://WS/", Order=2)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string arg2;
+        
+        public checkReservationRequest()
+        {
+        }
+        
+        public checkReservationRequest(int arg0, int arg1, string arg2)
+        {
+            this.arg0 = arg0;
+            this.arg1 = arg1;
+            this.arg2 = arg2;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="checkReservationResponse", WrapperNamespace="http://WS/", IsWrapped=true)]
+    public partial class checkReservationResponse
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://WS/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string @return;
+        
+        public checkReservationResponse()
+        {
+        }
+        
+        public checkReservationResponse(string @return)
+        {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="echo", WrapperNamespace="http://WS/", IsWrapped=true)]
+    public partial class echoRequest
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://WS/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string arg0;
+        
+        public echoRequest()
+        {
+        }
+        
+        public echoRequest(string arg0)
+        {
+            this.arg0 = arg0;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="echoResponse", WrapperNamespace="http://WS/", IsWrapped=true)]
+    public partial class echoResponse
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://WS/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string @return;
+        
+        public echoResponse()
+        {
+        }
+        
+        public echoResponse(string @return)
+        {
+            this.@return = @return;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.1.0")]
     public interface CinemaImplChannel : ServiceReference.CinemaImpl, System.ServiceModel.IClientChannel
     {
@@ -634,19 +690,6 @@ namespace ServiceReference
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<ServiceReference.echoResponse> ServiceReference.CinemaImpl.echoAsync(ServiceReference.echoRequest request)
-        {
-            return base.Channel.echoAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<ServiceReference.echoResponse> echoAsync(string arg0)
-        {
-            ServiceReference.echoRequest inValue = new ServiceReference.echoRequest();
-            inValue.arg0 = arg0;
-            return ((ServiceReference.CinemaImpl)(this)).echoAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.Threading.Tasks.Task<ServiceReference.getShowingsResponse> ServiceReference.CinemaImpl.getShowingsAsync(ServiceReference.getShowingsRequest request)
         {
             return base.Channel.getShowingsAsync(request);
@@ -698,6 +741,34 @@ namespace ServiceReference
             inValue.arg3 = arg3;
             inValue.arg4 = arg4;
             return ((ServiceReference.CinemaImpl)(this)).reserveSeatAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<ServiceReference.checkReservationResponse> ServiceReference.CinemaImpl.checkReservationAsync(ServiceReference.checkReservationRequest request)
+        {
+            return base.Channel.checkReservationAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference.checkReservationResponse> checkReservationAsync(int arg0, int arg1, string arg2)
+        {
+            ServiceReference.checkReservationRequest inValue = new ServiceReference.checkReservationRequest();
+            inValue.arg0 = arg0;
+            inValue.arg1 = arg1;
+            inValue.arg2 = arg2;
+            return ((ServiceReference.CinemaImpl)(this)).checkReservationAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<ServiceReference.echoResponse> ServiceReference.CinemaImpl.echoAsync(ServiceReference.echoRequest request)
+        {
+            return base.Channel.echoAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference.echoResponse> echoAsync(string arg0)
+        {
+            ServiceReference.echoRequest inValue = new ServiceReference.echoRequest();
+            inValue.arg0 = arg0;
+            return ((ServiceReference.CinemaImpl)(this)).echoAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
