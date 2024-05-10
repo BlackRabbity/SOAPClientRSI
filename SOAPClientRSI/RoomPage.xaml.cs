@@ -26,11 +26,13 @@ namespace SOAPClientRSI
     public partial class RoomPage : Page
     {
         public int showingId;
+        public int Columns;
         public RoomPage(showing showing, int showingId)
         {
             InitializeComponent();
             this.showingId = showingId;
-            Seats_ListBox.DataContext = showing.room.seats;
+            Seats_ListBox.DataContext = showing.room.seats.OrderBy(s => s.row).ToList();
+            Columns = showing.room.seats.Count() / 2;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -50,7 +52,7 @@ namespace SOAPClientRSI
                 await client.reserveSeatAsync(seatId, ",", showingId, ",", macAddress);
                 var result = await client.getShowingsAsync();
                 List<showing> showings = result.@return.ToList();
-                Seats_ListBox.DataContext = showings[showingId].room.seats;
+                Seats_ListBox.DataContext = showings[showingId].room.seats.OrderBy(s => s.row).ToList(); ;
 
             }
             catch (Exception ex)
