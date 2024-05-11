@@ -55,5 +55,23 @@ namespace SOAPClientRSI
         {
 
         }
+
+        private void ChangeReservedSeat(object sender, RoutedEventArgs e)
+        {
+            ListBox listBox = (ListBox)sender;
+            object selectedItem = listBox.SelectedItem;
+            seat selectedSeat = selectedItem as seat;
+            int seatId = selectedSeat.seatNumber - 1;
+            showing _showing = (showing)(sender as FrameworkElement).DataContext;
+            int showingId = _showing.id;
+            ChangeReservedSeatPopupWindow popup = new ChangeReservedSeatPopupWindow(seatId, showingId);
+            popup.Closed += Popup_Closed;
+            popup.ShowDialog();
+        }
+
+        private void Popup_Closed(object? sender, EventArgs e)
+        {
+            LoadReservationAsync();
+        }
     }
 }

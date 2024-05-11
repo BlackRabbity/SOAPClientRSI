@@ -39,7 +39,7 @@
                         <TextBlock Text="Starting time: ">
                         <TextBlock Text="{Binding date, Converter={StaticResource DateTimeConverter}, ConverterParameter=Time}"/>
                         </TextBlock>
-                            <ListBox ItemsSource="{Binding room.seats}" Margin="5">
+                            <ListBox x:Name="Seats_ListBox" ItemsSource="{Binding room.seats}" Margin="5" MouseDoubleClick="ChangeReservedSeat">
                                 <ListBox.Background>
                                     <SolidColorBrush Color="#33FFFFFF"/>
                                 </ListBox.Background>

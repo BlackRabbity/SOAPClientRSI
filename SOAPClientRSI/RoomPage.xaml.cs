@@ -50,9 +50,8 @@ namespace SOAPClientRSI
             try
             {
                 int seatId = Seats_ListBox.SelectedIndex;
-                var reservationMessage = await client.checkReservationAsync(seatId, showingId, macAddress);
+                var reservationMessage = await client.reserveSeatAsync(seatId, showingId, macAddress);
                 MessageBoxResult messageBox = MessageBox.Show(reservationMessage.@return, "Confirmation", MessageBoxButton.OK);
-                await client.reserveSeatAsync(seatId, ",", showingId, ",", macAddress);
                 var result = await client.getShowingsAsync();
                 List<showing> showings = result.@return.ToList();
                 Seats_ListBox.DataContext = showings[showingId].room.seats.OrderBy(s => s.row).ToList();
