@@ -1,7 +1,7 @@
 {
   "ExtendedData": {
     "inputs": [
-      "http://192.168.1.5:9999/ws/CinemaImpl?wsdl"
+      "http://127.0.0.1:9999/ws/CinemaImpl?wsdl"
     ],
     "collectionTypes": [
       "System.Array",

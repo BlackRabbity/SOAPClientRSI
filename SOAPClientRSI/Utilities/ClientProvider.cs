@@ -17,7 +17,7 @@ namespace SOAPClientRSI.Utilities
             BasicHttpBinding binding = new BasicHttpBinding();
             binding.MessageEncoding = WSMessageEncoding.Mtom;
 
-            EndpointAddress endpointAddress = new EndpointAddress("http://192.168.1.5:9999/ws/CinemaImpl?wsdl");
+            EndpointAddress endpointAddress = new EndpointAddress("http://127.0.0.1:4040/ws/CinemaImpl?wsdl");
 
             _client = new CinemaImplClient(binding, endpointAddress);
         }
