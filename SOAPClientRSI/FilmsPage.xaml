@@ -11,7 +11,7 @@
     <Page.Resources>
         <other:DateTimeConverter x:Key="DateTimeConverter"/>
     </Page.Resources>
-    <Grid>
+    <Grid x:Name="grid">
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
             <!-- 3/4 of the page -->
@@ -26,6 +26,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
+                        <Image Source="{Binding film.imageName}" Width="50" Height="50"/>
                         <TextBlock Text="{Binding film.title}" FontWeight="Bold"/>
                         <TextBlock>
                     <Run Text="Day of Play: "/>

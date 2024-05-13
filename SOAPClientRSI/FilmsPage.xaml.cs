@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ServiceReference;
 using SOAPClientRSI.Utilities;
+
 
 namespace SOAPClientRSI
 {
@@ -41,6 +43,17 @@ namespace SOAPClientRSI
             {
                 var result = await client.getShowingsAsync();
                 List<showing> showings = result.@return.ToList();
+                foreach (var showing in showings)
+                {
+                    if(!File.Exists("../../../Images/" + showing.film.imageName))
+                    {
+                        var response = await client.getFilmImageAsync(showing.film.imageName);
+                        byte[] imageBytes = response.@return;
+                        File.WriteAllBytes("../../../Images/" + showing.film.imageName, imageBytes);
+                    }
+                    string path = AppDomain.CurrentDomain.BaseDirectory;
+                    showing.film.imageName = AppDomain.CurrentDomain.BaseDirectory + "../../../Images/" +  showing.film.imageName;
+                }
                 Films_ListBox.DataContext = showings;
             }
             catch (Exception ex)

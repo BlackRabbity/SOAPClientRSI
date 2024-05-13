@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PdfSharp.Fonts;
+using SOAPClientRSI.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +15,9 @@ namespace SOAPClientRSI
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            GlobalFontSettings.FontResolver = new CustomFontResolver();
+        }
     }
 }

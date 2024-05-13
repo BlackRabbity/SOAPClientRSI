@@ -16,8 +16,10 @@ namespace SOAPClientRSI.Utilities
             // MTOM message encoding
             BasicHttpBinding binding = new BasicHttpBinding();
             binding.MessageEncoding = WSMessageEncoding.Mtom;
+            binding.MaxReceivedMessageSize = 1000000;
 
-            EndpointAddress endpointAddress = new EndpointAddress("http://127.0.0.1:4040/ws/CinemaImpl?wsdl");
+
+            EndpointAddress endpointAddress = new EndpointAddress("http://127.0.0.1:9999/ws/CinemaImpl?wsdl");
 
             _client = new CinemaImplClient(binding, endpointAddress);
         }
