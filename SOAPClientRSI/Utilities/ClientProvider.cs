@@ -1,4 +1,4 @@
-﻿using ServiceReference;
+using ServiceReference;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,8 +35,6 @@ namespace SOAPClientRSI.Utilities
                     Mode = BasicHttpSecurityMode.Transport
                 }
             };
-
-
             EndpointAddress endpointAddress = new EndpointAddress("https://127.0.0.1:9999/ws/CinemaImpl?wsdl");
 
             // Set custom certificate validation
